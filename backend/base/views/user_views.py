@@ -20,12 +20,14 @@ from rest_framework import status
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
+        print('hola')
+        print('DATA EN VALIDATE', data)
 
         serializer = UserSerializerWithToken(self.user).data
 
         for k, v in serializer.items():
            data[k] = v
-
+        print('DATA EN VALIDATE AFTER', data)   
         return data
 
 
@@ -52,6 +54,9 @@ def registerUser(request):
         return Response(message, status= status.HTTP_400_BAD_REQUEST)
 
 
+# @api_view(['PUT'])
+# @permission_classes([IsAuthenticated])
+# def updateUserProfile
 
 
 @api_view(['GET'])
